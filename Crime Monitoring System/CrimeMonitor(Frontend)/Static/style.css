@@ -1,0 +1,198 @@
+/* Dark Theme Main Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .container {
+    background-color: #1a2230;
+    border-radius: 12px;
+    border: 1px solid #30363d;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Form Grid Layout */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .full-width {
+    grid-column: 1 / -1;
+  }
+  
+  /* Form Elements */
+  input[type=text], 
+  textarea, 
+  select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #c9d1d9;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+  }
+  
+  input[type=text]:focus,
+  textarea:focus, 
+  select:focus {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
+  }
+  
+  /* Labels */
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #8b949e;
+  }
+  
+  /* Radio Groups */
+  .radio-group {
+    margin: 15px 0;
+  }
+  
+  .radio-option {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+  }
+  
+  .radio-option input[type="radio"] {
+    margin-right: 8px;
+  }
+  
+  .radio-option label {
+    margin: 0;
+    color: #c9d1d9;
+  }
+  
+  /* Header */
+  .form-header {
+    color: #58a6ff;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #30363d;
+    text-align: center;
+  }
+  
+  /* Section Headers */
+  .section-divider {
+    color: #58a6ff;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 25px 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #30363d;
+  }
+  
+  /* Submit Button */
+  .submitbtn {
+    background-color: #238636;
+    color: #ffffff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    margin-top: 20px;
+  }
+  
+  .submitbtn:hover {
+    background-color: #2ea043;
+  }
+  
+  /* Summarize Button */
+  .summarize-btn {
+    background-color: #1f6feb;
+    color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    margin-top: 8px;
+  }
+  
+  .summarize-btn:hover {
+    background-color: #388bfd;
+  }
+  
+  /* Summary Stats */
+  .summary-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #8b949e;
+    margin-top: 4px;
+  }
+  
+  /* Timestamp */
+  .timestamp {
+    background-color: #0d1117;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #8b949e;
+  }
+  
+  /* Warning Text */
+  .urgent {
+    color: #f85149;
+    font-size: 13px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  /* Preview Panel */
+  .preview-panel {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    color: #c9d1d9;
+  }
+  
+  .preview-header {
+    color: #58a6ff;
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #30363d;
+  }
+  
+  .preview-content {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .preview-item {
+    margin: 8px 0;
+  }
+  
+  .preview-label {
+    color: #8b949e;
+    margin-right: 10px;
+  }

@@ -1,0 +1,152 @@
+/* Officer Dashboard Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #30363d;
+}
+
+.header-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat {
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #1a2230;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+}
+
+.stat span {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #58a6ff;
+}
+
+.stat label {
+    font-size: 14px;
+    color: #8b949e;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 8px 12px;
+    background-color: #1a2230;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #c9d1d9;
+    font-size: 14px;
+}
+
+.report-card {
+    background-color: #1a2230;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #30363d;
+}
+
+.risk-level {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.risk-level.high {
+    background-color: #f85149;
+    color: white;
+}
+
+.risk-level.medium {
+    background-color: #db6d28;
+    color: white;
+}
+
+.risk-level.low {
+    background-color: #238636;
+    color: white;
+}
+
+.report-content {
+    margin-bottom: 15px;
+}
+
+.incident-type {
+    font-weight: bold;
+    color: #58a6ff;
+    margin-bottom: 8px;
+}
+
+.key-indicators {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.key-indicators span {
+    background-color: #0d1117;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.report-footer {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.view-details {
+    background-color: #1f6feb;
+    color: white;
+}
+
+.assign-officer {
+    background-color: #238636;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+}
