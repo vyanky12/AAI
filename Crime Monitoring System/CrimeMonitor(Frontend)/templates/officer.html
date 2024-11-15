@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Dashboard - Incident Reports</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='officer_style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Officer Dashboard</h1>
+            <div class="header-stats">
+                <div class="stat">
+                    <span id="highRiskCount">0</span>
+                    <label>High Risk</label>
+                </div>
+                <div class="stat">
+                    <span id="mediumRiskCount">0</span>
+                    <label>Medium Risk</label>
+                </div>
+                <div class="stat">
+                    <span id="lowRiskCount">0</span>
+                    <label>Low Risk</label>
+                </div>
+            </div>
+        </header>
+
+        <div class="filters">
+            <select id="riskFilter">
+                <option value="all">All Risks</option>
+                <option value="HIGH RISK">High Risk</option>
+                <option value="MEDIUM RISK">Medium Risk</option>
+                <option value="LOW RISK">Low Risk</option>
+            </select>
+            <select id="timeFilter">
+                <option value="all">All Time</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+            </select>
+        </div>
+
+        <div id="reports-container">
+            <!-- Reports will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <template id="report-template">
+        <div class="report-card">
+            <div class="report-header">
+                <span class="report-id"></span>
+                <span class="timestamp"></span>
+                <span class="risk-level"></span>
+            </div>
+            <div class="report-content">
+                <div class="incident-type"></div>
+                <div class="location"></div>
+                <div class="summary"></div>
+                <div class="key-indicators"></div>
+            </div>
+            <div class="report-footer">
+                <button class="view-details">View Details</button>
+                <button class="assign-officer">Assign Officer</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="{{ url_for('static', filename='officer_dashboard.js') }}"></script>
+</body>
+</html>

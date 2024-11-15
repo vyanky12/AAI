@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+</head>
+<body>
+<form id="incidentForm">
+  <div class="container">
+    <h1 class="form-header">Incident Report</h1>
+    
+    <div class="form-grid">
+      <!-- Reporter's Information -->
+      <div class="section-divider full-width">Reporter's Information</div>
+      
+      <div>
+        <label>Full Name</label>   
+        <input type="text" name="fullname" placeholder="Enter your full name" required />
+      </div>
+
+      <div>
+        <label>Contact Number</label>
+        <input type="text" name="phone" placeholder="Enter your contact number" required />
+      </div>
+
+      <!-- Incident Details -->
+      <div class="section-divider full-width">Incident Details</div>
+
+      <div>
+        <label>Type of Incident</label>
+        <select name="incidentType" required>
+          <option value="">Select Type</option>
+          <option value="theft">Theft/Robbery</option>
+          <option value="assault">Assault</option>
+          <option value="vandalism">Vandalism</option>
+          <option value="harassment">Harassment</option>
+          <option value="noise">Noise Complaint</option>
+          <option value="suspicious">Suspicious Activity</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div>
+        <div class="timestamp">
+          <script>
+            document.write("Report Time: " + new Date().toLocaleString());
+          </script>
+        </div>
+      </div>
+
+      <div class="full-width">
+        <label>Location of Incident</label>
+        <input type="text" name="location" placeholder="Enter detailed location" required />
+      </div>
+
+      <div class="full-width">
+        <label>Incident Description</label>
+        <textarea rows="4" name="description" id="descriptionInput" placeholder="Please provide a detailed description of what happened" required></textarea>
+        <button type="button" class="summarize-btn" onclick="summarizeText()">Generate Summary</button>
+      </div>
+
+      <div class="full-width">
+        <label>Summary</label>
+        <textarea rows="3" name="summary" id="summaryOutput" readonly></textarea>
+        <div class="summary-stats">
+          <span id="originalLength">Original length: 0 words</span>
+          <span id="summaryLength">Summary length: 0 words</span>
+        </div>
+      </div>
+
+      <div class="radio-group">
+        <label>Urgency Level</label>
+        <div class="radio-option">
+          <input type="radio" name="urgency" value="Emergency Response"> 
+          <label>Emergency Response</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="urgency" value="Urgent (24hr)"> 
+          <label>Urgent (24hr)</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="urgency" value="Non-urgent" checked> 
+          <label>Non-urgent</label>
+        </div>
+      </div>
+
+      <div class="radio-group">
+        <label>Witnesses Present?</label>
+        <div class="radio-option">
+          <input type="radio" name="witnesses" value="yes"> 
+          <label>Yes</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="witnesses" value="no" checked> 
+          <label>No</label>
+        </div>
+      </div>
+
+      <div id="witnessDetails" class="full-width" style="display: none;">
+        <label>Witness Details</label>
+        <textarea rows="3" name="witnessInfo" placeholder="Provide witness names and contact information if available"></textarea>
+      </div>
+    </div>
+
+    <p class="urgent">* For emergencies requiring immediate response, please call emergency services directly.</p>
+    
+    <button type="submit" class="submitbtn">Submit Report</button>
+
+    <!-- Preview Panel -->
+    <div class="preview-panel" id="previewPanel">
+      <div class="preview-header">Report Preview</div>
+      <div class="preview-content" id="previewContent">
+        <!-- Preview content will be populated here -->
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+// Handle witness details visibility
+document.querySelectorAll('input[name="witnesses"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        document.getElementById('witnessDetails').style.display = 
+            this.value === 'yes' ? 'block' : 'none';
+    });
+});
+
+// Function to summarize text
+async function summarizeText() {
+    const descriptionText = document.getElementById('descriptionInput').value;
+    if (!descriptionText.trim()) {
+        alert('Please enter a description first.');
+        return;
+    }
+
+    try {
+        const response = await fetch('/summarize', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: descriptionText })
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        document.getElementById('summaryOutput').value = data.summary;
+        document.getElementById('originalLength').textContent = `Original length: ${data.original_length} words`;
+        document.getElementById('summaryLength').textContent = `Summary length: ${data.summary_length} words`;
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error generating summary. Please try again.');
+    }
+}
+
+// Live preview functionality
+function updatePreview() {
+    const form = document.getElementById('incidentForm');
+    const previewContent = document.getElementById('previewContent');
+    const formData = new FormData(form);
+    
+    let previewHTML = '';
+    for (let [key, value] of formData.entries()) {
+        if (value && key !== 'witnesses') {  // Skip empty fields and witnesses radio
+            let label = document.querySelector(`label[for='${key}']`)?.textContent || 
+                       key.charAt(0).toUpperCase() + key.slice(1);
+            previewHTML += `
+                <div class="preview-item">
+                    <span class="preview-label">${label}:</span>
+                    <span>${value}</span>
+                </div>`;
+        }
+    }
+    
+    previewContent.innerHTML = previewHTML;
+}
+
+// Add event listeners for form inputs
+document.querySelectorAll('input, textarea, select').forEach(element => {
+    element.addEventListener('input', updatePreview);
+    element.addEventListener('change', updatePreview);
+});
+
+// Prevent form submission (for demo purposes)
+document.getElementById('incidentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Form submitted successfully!');
+});
+</script>
+</body>
+</html>
